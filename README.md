@@ -1,5 +1,4 @@
 # Sumopixel
-
 ### Code Editor Docs
 
 The idea is that you can write JavaScript as you like and access the same features of the Pixel that are being used by the editor itself. So we have exposed some of the variables and functions into window scope, which means you can access them in the code window.
@@ -9,52 +8,97 @@ Here are the variables available in the code window
 
 ## Vars
 
-- `Pixel.gridSize` - If grid size is 32 x 32 then this value is `32` etc.
-- `Pixel.brushColor` - Color code of the currently selected color, eg `#ffffff`
-- `Pixel.frames` - total number of frames (counted starting from zero)
-- `Pixel.currentFrame` - number of the current frame (starts from zero)
+- `gridSize` - If grid size is 32 x 32 then this value is `32` etc.
+- `brushColor` - Color code of the currently selected color, eg `rgb(255, 255, 255)`
+- `frames` - total number of frames (counted starting from zero)
+- `currentFrame` - number of the current frame (starts from zero)
 
 ## Methods
 
 ### setPixel
-`Pixel.setPixel(x, y, color)`
+`setPixel(x, y, color)`
 
 Sets pixel color of given x, y coordinate. 
-For example `Pixel.setPixel(10, 10, 'white')`
+For example `setPixel(10, 10, 'rgb(255, 255, 255)')`
 
 ### setPixelByIndex
-`Pixel.setPixelByIndex(index, color)`
+`setPixelByIndex(index, color)`
 
 Sets pixel color at given index (0 - total amount of pixels). 
-For example `Pixel.setPixelByIndex(64, '#cc00ff')`
+For example `setPixelByIndex(64, 'rgb(255, 255, 255)')`
+
+### listColors
+`listColors()`
+Outputs list of all color codes used in the scene into developer console.
+
+### invertColor
+`invertColors(target)`
+
+target is optional argument for telling which colors should be inverted.
+For example:
+- `invertColors()` inverts all colors
+- `invertColors('rgb(255, 255, 255)`) inverts only white colors
+- `invertColors(['rgb(0, 0, 0,)', 'rgb(255, 255, 255)'])` inverts black and white colors.
+Hint: when you hover pixel with mouse you will get its color code as a tooltip
+
+### replaceColor
+`replaceColor(oldColor, newColor)`
+Replaces each pixel with given color with new color.
+
+For example: `replaceColor('rgb(255, 255, 255)', 'rgb(183, 28, 28)')` turns all white pixels into red.
+
+### drawHLine
+`drawHLine(row, color)`
+Draws horizontal line at given row number (y-coordinate).
+
+For example: `drawHLine(4, 'rgb(255, 255, 255)')` draws white line on fourth row
+
+### drawVLine
+`drawVLine(col, color)`
+Draws horizontal line at given column number (x-coordinate).
+
+For example: `drawHLine(4, 'rgb(255, 255, 255)')` draws white line on fourth row
 
 ### play
-`Pixel.play(fps)`
+`play(fps)`
 
 Toggles play / pause. Parameter `fps` is optional frames-per-seconds if you want to set the animation speed.
 For example: `play(15)` would start animation playback at 15 frames per second.
 
 ### gotoFrame
 
-`Pixel.gotoFrame(frame)` - Goes into frame.
+`gotoFrame(frame)` - Goes into frame.
 
 ### addFrame
 
-`Pixel.addFrame()` creates new empty frame.
+`addFrame()` creates new empty frame.
 
-### addFrame
+### copyFrame
 
-`Pixel.copyFrame()` creates new frame as a copy from the current frame.
+`copyFrame()` creates new frame as a copy from the current frame.
 
 ### wait
 
-`Pixel.wait(seconds)` waits given time in seconds and returns promise.
-For example: `Pixel.wait(3).then(() => { do something })`
+`wait(seconds)` waits given time in seconds and returns promise.
+For example: `wait(3).then(() => { do something })`
 
 
 ### shiftUp, shiftDown, shiftLeft, shiftRight
 
-`Pixel.shiftLeft()` moves everything left by one pixel.
+`shiftLeft()` moves everything left by one pixel.
+
+### clear
+`clear(x, y)`
+Removes pixel from given coordinate.
+For example: `clear (1, 1)`
+
+### clearFrame
+`clearFrame()`
+Clears entire frame.
+
+### clearAll
+`clearAll()`
+Clears all frames.
 
 # Other
 
@@ -73,30 +117,12 @@ Following triggers success notification
 Following triggers error notification
 ```notify({ type: 'error', message: 'Something went wrong..' })```
 
-# Tips
-
-If you don't want to type Pixel. front of all methods and vars you can do this:
-
-```
-const { addFrame, play } = Pixel
-
-addFrame()
-play()
-```
-
-It would be as same this
-```
-Pixel.addFrame()
-Pixel.play()
-```
 
 # Example 1: Fill grid with random colors
 
 We determine how many pixels there are in the grid from gridSize. Then loop through each pixels and use `updateGrid()` to set the color.
 
 ```
-const { gridSize, setPixelByIndex } = Pixel
-
 function random(max) {
   return Math.floor(Math.random() * Math.floor(max))
 }
@@ -113,27 +139,20 @@ for (let px = 0; px < gridSize; px++) {
 This example generates three frames with some colored lines and then starts playback
 
 ```
-const { gotoFrame, addFrame, gridSize, setPixel, play } = Pixel
-
 gotoFrame(0)
 
-for (var x = 1; x <= gridSize; x++) {
-  setPixel(x, 1, 'green')
-}
+drawHLine(1, 'red')
 
 addFrame()
 gotoFrame(1)
 
-for (var x = 1; x <= gridSize; x++) {
-  setPixel(x, 2, 'red')
-}
+drawHLine(2, 'green')
+
 
 addFrame()
 gotoFrame(2)
 
-for (var x = 1; x <= gridSize; x++) {
-  setPixel(x, 3, 'blue')
-}
+drawHLine(3, 'blue')
 
 play(5)
 
@@ -145,7 +164,7 @@ This moves all pixels one row up in every 100ms.
 
 ```
 let timer = setInterval(() => {
-  Pixel.shiftUp()
+  shiftUp()
 }, 100)
 ```
 
@@ -154,8 +173,6 @@ let timer = setInterval(() => {
 We can use standard JavaScript event listeners to catch key strokes and map them with functionality.
 
 ```
-const { clearFrame, gridSize, setPixel, setPixelByIndex, gridColumns } = Pixel
-
 let index = (gridSize / 2) + (gridColumns / 2)
 
 setPixelByIndex(index, 'white')
@@ -187,64 +204,11 @@ window.addEventListener('keydown', (e) => {
 })
 ```
 
-# Example 5: Invert colors
-
-Go through the data and invert each pixel color
-
-```
-const { gridSize, setPixelByIndex, frames, currentFrame } = Pixel
-
-function padZero(str, len) {
-    len = len || 2;
-    var zeros = new Array(len).join('0');
-    return (zeros + str).slice(-len);
-}
-
-function invertColor(rgb) {
-  if (rgb == null) {
-    return 'rgb(255, 255, 255) '
-  } else {
-    if (rgb.indexOf('#') === 0) {
-      // hex color
-      rgb = rgb.replace('#', '')
-      if (rgb.length === 3) {
-        rgb = rgb[0] + rgb[0] + rgb[1] + rgb[1] + rgb[2] + rgb[2];
-      }
-      let r = parseInt(rgb.slice(0, 2), 16)
-      let g = parseInt(rgb.slice(2, 4), 16)
-      let b = parseInt(rgb.slice(4, 6), 16)
-      r = (255 - r).toString(16);
-      g = (255 - g).toString(16);
-      b = (255 - b).toString(16);
-      return `#${padZero(r)}${padZero(g)}${padZero(b)}`
-    } else {
-      // rgb color
-      let rgbArr = rgb.split(',')
-      let r = rgbArr[0].replace('rgba(', '').replace('rgb(', '')
-      let g = rgbArr[1]
-      let b = rgbArr[2].replace(')', '')
-      r = (255 - r).toString();
-      g = (255 - g).toString();
-      b = (255 - b).toString();
-      return `rgb(${r}, ${g}, ${b})`
-    }
-  }
-}
-
-const scene = frames[currentFrame]
-
-for (let px = 0; px < gridSize; px++) {
-  setPixelByIndex(px, invertColor(scene[px].color))
-}
-```
-
-# Example 6 - Cycle through frames
+# Example 5 - Cycle through frames
 
 Go to next frame in every 500ms.
 
 ```
-const { frames, gotoFrame } = Pixel
-
 let frame = 0
 
 setInterval(() => {
