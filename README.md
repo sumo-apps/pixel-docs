@@ -1,91 +1,101 @@
 # Sumopixel
 
-Pixel art editor
-
 ### Code Editor Docs
 
 The idea is that you can write JavaScript as you like and access the same features of the Pixel that are being used by the editor itself. So we have exposed some of the variables and functions into window scope, which means you can access them in the code window.
 
-# Variables
+# Pixel object
 Here are the variables available in the code window
 
-`gridSize` - If grid size is 32 x 32 then this value is `32` etc.
-`brushColor` - Color code of the currently selected color, eg `#ffffff`
-`scene` - Grid data array of the current frame
-`frames` - total number of frames (counted starting from zero)
-`currentFrame` - number of the current frame (starts from zero)
+## Vars
 
-# Methods
+- `Pixel.gridSize` - If grid size is 32 x 32 then this value is `32` etc.
+- `Pixel.brushColor` - Color code of the currently selected color, eg `#ffffff`
+- `Pixel.frames` - total number of frames (counted starting from zero)
+- `Pixel.currentFrame` - number of the current frame (starts from zero)
+
+## Methods
+
+### setPixel
+`Pixel.setPixel(x, y, color)`
+
+Sets pixel color of given x, y coordinate. 
+For example `Pixel.setPixel(10, 10, 'white')`
+
+### setPixelByIndex
+`Pixel.setPixelByIndex(index, color)`
+
+Sets pixel color at given index (0 - total amount of pixels). 
+For example `Pixel.setPixelByIndex(64, '#cc00ff')`
 
 ### play
-`play(fps)`
+`Pixel.play(fps)`
+
 Toggles play / pause. Parameter `fps` is optional frames-per-seconds if you want to set the animation speed.
 For example: `play(15)` would start animation playback at 15 frames per second.
 
-### shiftUp, shiftLeft, shiftRight, shiftUp
-- `shiftUp()` - Moves grid content one row upwards
-- `shiftLeft()` - Moves grid content one column left
-- `shiftRight()` - Moves grid content one column right
-- `shiftDown()` - Moves grid content one row downwards
+### gotoFrame
+
+`Pixel.gotoFrame(frame)` - Goes into frame.
+
+### addFrame
+
+`Pixel.addFrame()` creates new empty frame.
+
+### addFrame
+
+`Pixel.copyFrame()` creates new frame as a copy from the current frame.
+
+### wait
+
+`Pixel.wait(seconds)` waits given time in seconds and returns promise.
+For example: `Pixel.wait(3).then(() => { do something })`
+
+
+### shiftUp, shiftDown, shiftLeft, shiftRight
+
+`Pixel.shiftLeft()` moves everything left by one pixel.
+
+# Other
 
 ### animate
-`animate(index, all)`
+`animate(x, y)`
 Animates the grid with ripple effect.
-
-- `index` is pixel number of the center point where `0` is the first pixel and length of the grid is the last pixel.
-- `all` is optional parameter to tell if all pixels should be animated. Without all parameter only empty pixels are animated.
 
 ### notify
 `notify({ type, message })` - Triggers notification.
 
 For example.
+
 Following triggers success notification
 ```notify({ type: 'success', message: 'Done!' })```
 
 Following triggers error notification
 ```notify({ type: 'error', message: 'Something went wrong..' })```
 
-### updateGrid
+# Tips
 
-`updateGrid({ index, props })`
-Re-renders the grid with new data
+If you don't want to type Pixel. front of all methods and vars you can do this:
 
-For example, following would make 10th pixel in the grid black.
 ```
-    updateGrid({
-		index: 10, 
-		props: {
-			color: '#000000'
-		}
-	})
+const { addFrame, play } = Pixel
+
+addFrame()
+play()
 ```
 
-### setBrushColor
-
-`setBrushColor(colorCode)` - Set brush color. ColorCode is any HTML standard color code, such as `#ffffff`, `white` or `rgb(255, 255, 255)` etc.
-
-### paintPixel
-
-`paintPixel(index)` - paints given pixel with current brush color
-
-### erasePixel
-
-`erasePixel(index)` - Erases given pixel and makes it transparent
-
-### gotoFrame
-
-`gotoFrame(frame)` - Goes into frame. Same as clicking on any frame button.
-
-### addFrame
-
-`addFrame()` creates new frame. Same as clicking plus button to add frame.
+It would be as same this
+```
+Pixel.addFrame()
+Pixel.play()
+```
 
 # Example 1: Fill grid with random colors
 
 We determine how many pixels there are in the grid from gridSize. Then loop through each pixels and use `updateGrid()` to set the color.
 
 ```
-const allPixels = gridSize * gridSize
+const { gridSize, setPixelByIndex } = Pixel
 
 function random(max) {
   return Math.floor(Math.random() * Math.floor(max))
@@ -93,29 +103,40 @@ function random(max) {
 
 const randomColor = () => `rgb(${random(255)}, ${random(255)}, ${random(255)})`
 
-for (let px = 0; px < allPixels; px++) {
-  updateGrid({
-    index: px,
-    props: {
-      color: randomColor()
-     }
-  })
+for (let px = 0; px < gridSize; px++) {
+  setPixelByIndex(px, randomColor())
 }
 ```
 
 # Example 2: generate frames
 
-This example generates 10 frames
+This example generates three frames with some colored lines and then starts playback
 
 ```
-async function createFrames() {
-	for (let i = 0; i < 10; i++) {
-		await addFrame()
-			.then(() => paintPixel(random(gridSize * gridSize)))
-	}
+const { gotoFrame, addFrame, gridSize, setPixel, play } = Pixel
+
+gotoFrame(0)
+
+for (var x = 1; x <= gridSize; x++) {
+  setPixel(x, 1, 'green')
 }
 
-createFrames()
+addFrame()
+gotoFrame(1)
+
+for (var x = 1; x <= gridSize; x++) {
+  setPixel(x, 2, 'red')
+}
+
+addFrame()
+gotoFrame(2)
+
+for (var x = 1; x <= gridSize; x++) {
+  setPixel(x, 3, 'blue')
+}
+
+play(5)
+
 ```
 
 # Example 3: Roll it up
@@ -124,7 +145,7 @@ This moves all pixels one row up in every 100ms.
 
 ```
 let timer = setInterval(() => {
-   shiftUp()
+  Pixel.shiftUp()
 }, 100)
 ```
 
@@ -133,18 +154,35 @@ let timer = setInterval(() => {
 We can use standard JavaScript event listeners to catch key strokes and map them with functionality.
 
 ```
+const { clearFrame, gridSize, setPixel, setPixelByIndex, gridColumns } = Pixel
+
+let index = (gridSize / 2) + (gridColumns / 2)
+
+setPixelByIndex(index, 'white')
+
 window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') {
-    shiftUp()
+    clearFrame()
+    index = index - gridColumns
+    setPixelByIndex(index, 'white')
   }
+
   if (e.key === 'ArrowDown') {
-    shiftDown()
+    clearFrame()
+    index = index + gridColumns
+    setPixelByIndex(index, 'white')
   }
+
   if (e.key === 'ArrowLeft') {
-    shiftLeft()
+    clearFrame()
+    index = index - 1
+    setPixelByIndex(index, 'white')
   }
+
   if (e.key === 'ArrowRight') {
-    shiftRight()
+    clearFrame()
+    index = index + 1
+    setPixelByIndex(index, 'white')
   }
 })
 ```
@@ -154,7 +192,7 @@ window.addEventListener('keydown', (e) => {
 Go through the data and invert each pixel color
 
 ```
-const allPixels = gridSize * gridSize
+const { gridSize, setPixelByIndex, frames, currentFrame } = Pixel
 
 function padZero(str, len) {
     len = len || 2;
@@ -193,15 +231,11 @@ function invertColor(rgb) {
   }
 }
 
-for (let px = 0; px < allPixels; px++) {
-  updateGrid({
-    index: px,
-    props: {
-      color: invertColor(scene[px].color)
-     }
-  })
-}
+const scene = frames[currentFrame]
 
+for (let px = 0; px < gridSize; px++) {
+  setPixelByIndex(px, invertColor(scene[px].color))
+}
 ```
 
 # Example 6 - Cycle through frames
@@ -209,14 +243,17 @@ for (let px = 0; px < allPixels; px++) {
 Go to next frame in every 500ms.
 
 ```
+const { frames, gotoFrame } = Pixel
+
 let frame = 0
 
 setInterval(() => {
-   if (frame >= frames.length - 1) {
-     frame = 0
-   } else {
-     frame++
-   }
-   gotoFrame(frame)
+  if (frame < frames.length - 1) {
+    gotoFrame(frame)
+    frame++
+  } else {
+    frame = 0
+  }
+  gotoFrame(frame)
 }, 500)
 ```
