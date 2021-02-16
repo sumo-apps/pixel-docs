@@ -10,6 +10,8 @@ Here are the variables available in the code window
 
 - `gridSize` - If grid size is 32 x 32 then this value is `1024` etc.
 - `gridColumns` - Number of columns (or rows) in the grid.
+- `width` - same as gridColumns.
+- `height` - same as gridColumns.
 - `brushColor` - Color code of the currently selected color, eg `rgb(255, 255, 255)`
 - `frames` - total number of frames (counted starting from zero)
 - `currentFrame` - number of the current frame (starts from zero)
@@ -83,7 +85,6 @@ For example: `play(15)` would start animation playback at 15 frames per second.
 `wait(seconds)` waits given time in seconds and returns promise.\
 For example: `wait(3).then(() => { do something })`
 
-
 ### shiftUp, shiftDown, shiftLeft, shiftRight
 
 `shiftLeft()` moves everything left by one pixel.
@@ -100,6 +101,15 @@ Clears entire frame.
 ### clearAll
 `clearAll()`\
 Clears all frames.
+
+### synth
+Synthetizer (ToneJS) Experimental!\
+For example: `synth.triggerAttackRelease('C4', '16n')`\
+More documentation: https://tonejs.github.io/docs/14.7.77/Synth
+
+### random
+`random(max)`\
+Return random value between zero and given max value.
 
 # Other
 
