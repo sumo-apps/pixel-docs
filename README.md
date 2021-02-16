@@ -18,43 +18,43 @@ Here are the variables available in the code window
 ### setPixel
 `setPixel(x, y, color)`
 
-Sets pixel color of given x, y coordinate. 
+Sets pixel color of given x, y coordinate.\
 For example `setPixel(10, 10, 'rgb(255, 255, 255)')`
 
 ### setPixelByIndex
 `setPixelByIndex(index, color)`
 
-Sets pixel color at given index (0 - total amount of pixels). 
+Sets pixel color at given index (0 - total amount of pixels).\
 For example `setPixelByIndex(64, 'rgb(255, 255, 255)')`
 
 ### listColors
 `listColors()`
-Outputs list of all color codes used in the scene into developer console.
+Outputs list of all color codes used in the scene into developer console.\
 
 ### invertColor
 `invertColors(target)`
 
-target is optional argument for telling which colors should be inverted.
+target is optional argument for telling which colors should be inverted.\
 For example:
 - `invertColors()` inverts all colors
 - `invertColors('rgb(255, 255, 255)`) inverts only white colors
-- `invertColors(['rgb(0, 0, 0,)', 'rgb(255, 255, 255)'])` inverts black and white colors.
+- `invertColors(['rgb(0, 0, 0,)', 'rgb(255, 255, 255)'])` inverts black and white colors.\
 Hint: when you hover pixel with mouse you will get its color code as a tooltip
 
 ### replaceColor
-`replaceColor(oldColor, newColor)`
+`replaceColor(oldColor, newColor)`\
 Replaces each pixel with given color with new color.
 
 For example: `replaceColor('rgb(255, 255, 255)', 'rgb(183, 28, 28)')` turns all white pixels into red.
 
 ### drawHLine
-`drawHLine(row, color)`
+`drawHLine(row, color)`\
 Draws horizontal line at given row number (y-coordinate).
 
 For example: `drawHLine(4, 'rgb(255, 255, 255)')` draws white line on fourth row
 
 ### drawVLine
-`drawVLine(col, color)`
+`drawVLine(col, color)`\
 Draws horizontal line at given column number (x-coordinate).
 
 For example: `drawHLine(4, 'rgb(255, 255, 255)')` draws white line on fourth row
@@ -62,7 +62,7 @@ For example: `drawHLine(4, 'rgb(255, 255, 255)')` draws white line on fourth row
 ### play
 `play(fps)`
 
-Toggles play / pause. Parameter `fps` is optional frames-per-seconds if you want to set the animation speed.
+Toggles play / pause. Parameter `fps` is optional frames-per-seconds if you want to set the animation speed.\
 For example: `play(15)` would start animation playback at 15 frames per second.
 
 ### gotoFrame
@@ -79,7 +79,7 @@ For example: `play(15)` would start animation playback at 15 frames per second.
 
 ### wait
 
-`wait(seconds)` waits given time in seconds and returns promise.
+`wait(seconds)` waits given time in seconds and returns promise.\
 For example: `wait(3).then(() => { do something })`
 
 
@@ -88,22 +88,22 @@ For example: `wait(3).then(() => { do something })`
 `shiftLeft()` moves everything left by one pixel.
 
 ### clear
-`clear(x, y)`
-Removes pixel from given coordinate.
+`clear(x, y)`\
+Removes pixel from given coordinate.\
 For example: `clear (1, 1)`
 
 ### clearFrame
-`clearFrame()`
+`clearFrame()`\
 Clears entire frame.
 
 ### clearAll
-`clearAll()`
+`clearAll()`\
 Clears all frames.
 
 # Other
 
 ### animate
-`animate(x, y)`
+`animate(x, y)`\
 Animates the grid with ripple effect.
 
 ### notify
@@ -111,10 +111,10 @@ Animates the grid with ripple effect.
 
 For example.
 
-Following triggers success notification
+Following triggers success notification\
 ```notify({ type: 'success', message: 'Done!' })```
 
-Following triggers error notification
+Following triggers error notification\
 ```notify({ type: 'error', message: 'Something went wrong..' })```
 
 
