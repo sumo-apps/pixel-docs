@@ -8,7 +8,8 @@ Here are the variables available in the code window
 
 ## Vars
 
-- `gridSize` - If grid size is 32 x 32 then this value is `32` etc.
+- `gridSize` - If grid size is 32 x 32 then this value is `1024` etc.
+- `gridColumns` - Number of columns (or rows) in the grid.
 - `brushColor` - Color code of the currently selected color, eg `rgb(255, 255, 255)`
 - `frames` - total number of frames (counted starting from zero)
 - `currentFrame` - number of the current frame (starts from zero)
