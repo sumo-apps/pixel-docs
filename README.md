@@ -224,6 +224,8 @@ let index = (gridSize / 2) + (gridColumns / 2)
 
 setPixelByIndex(index, 'white')
 
+window.focus()
+
 window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') {
     clearFrame()
