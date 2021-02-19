@@ -175,10 +175,6 @@ Following triggers error notification\
 We determine how many pixels there are in the grid from gridSize. Then loop through each pixels and use `updateGrid()` to set the color.
 
 ```
-function random(max) {
-  return Math.floor(Math.random() * Math.floor(max))
-}
-
 const randomColor = () => `rgb(${random(255)}, ${random(255)}, ${random(255)})`
 
 for (let px = 0; px < gridSize; px++) {
