@@ -182,7 +182,7 @@ let timer = setInterval(() => {
 We can use standard JavaScript event listeners to catch key strokes and map them with functionality.
 
 ```
-let index = (gridSize / 2) + (gridColumns / 2)
+let index = (gridSize / 2) + (width / 2)
 
 setPixelByIndex(index, 'white')
 
@@ -191,13 +191,13 @@ window.focus()
 window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') {
     clearFrame()
-    index = index - gridColumns
+    index = index - width
     setPixelByIndex(index, 'white')
   }
 
   if (e.key === 'ArrowDown') {
     clearFrame()
-    index = index + gridColumns
+    index = index + width
     setPixelByIndex(index, 'white')
   }
 
