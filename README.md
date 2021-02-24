@@ -1,5 +1,5 @@
 # Sumopixel
-Documentation updated 19.2.2021
+Documentation updated 24.2.2021
 
 ### Code Editor Docs
 
@@ -31,6 +31,30 @@ For example `setPixel(10, 10, 'rgb(255, 255, 255)')`
 
 Sets pixel color at given index (0 - total amount of pixels).\
 For example `setPixelByIndex(64, 'rgb(255, 255, 255)')`
+
+### onPress
+`onPress = function`
+
+Gets triggered when pixel on a grid is clicked on and returns an object with the pixel index, column, row and color.\
+For example:\
+`onPress = (pixel) => console.log(pixel)`\
+outputs:
+```
+{
+  index: number,
+  column: number,
+  row: number,
+  color: string
+}
+```
+\
+Then you could turn that pixel white by doing this:\
+`onPress = (pixel) => setPixelByIndex(pixel.index, 'white')`\
+\
+or this..\
+\
+`onPress = (pixel) => setPixel(pixel.column, pixel.row, 'white')`
+
 
 ### listColors
 `listColors()`
