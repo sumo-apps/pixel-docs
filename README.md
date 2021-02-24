@@ -32,12 +32,12 @@ For example `setPixel(10, 10, 'rgb(255, 255, 255)')`
 Sets pixel color at given index (0 - total amount of pixels).\
 For example `setPixelByIndex(64, 'rgb(255, 255, 255)')`
 
-### onPress
-`onPress = function`
+### Pixel.onPress
+`Pixel.onPress = function`
 
 Gets triggered when pixel on a grid is clicked on and returns an object with the pixel index, column, row and color.\
 For example:\
-`onPress = (pixel) => console.log(pixel)`\
+`Pixel.onPress = (pixel) => console.log(pixel)`\
 outputs:
 ```
 {
@@ -49,11 +49,11 @@ outputs:
 ```
 \
 Then you could turn that pixel white by doing this:\
-`onPress = (pixel) => setPixelByIndex(pixel.index, 'white')`\
+`Pixel.onPress = (pixel) => setPixelByIndex(pixel.index, 'white')`\
 \
 or this..\
 \
-`onPress = (pixel) => setPixel(pixel.column, pixel.row, 'white')`
+`Pixel.onPress = (pixel) => setPixel(pixel.column, pixel.row, 'white')`
 
 
 ### listColors
