@@ -29,10 +29,12 @@ or\
 `setPixel(10, 10, 'https://sumo.app/images/icons/sumo-icon-64.png')` sets pixel at 10, 10 (x,y) into Sumo logo.
 
 ### setPixelByIndex
-`setPixelByIndex(index, color)`
+`setPixelByIndex(index, color-or-image)`
 
-Sets pixel color at given index (0 - total amount of pixels).\
+Sets pixel color or image at given index (0 - total amount of pixels).\
 For example `setPixelByIndex(64, 'rgb(255, 255, 255)')`
+or\
+`setPixelByIndex(64, 'https://sumo.app/images/icons/sumo-icon-64.png')`
 
 ### Pixel.onPress
 `Pixel.onPress = function`
