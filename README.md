@@ -21,10 +21,12 @@ Here are the variables available in the code window
 ## Methods
 
 ### setPixel
-`setPixel(x, y, color)`
+`setPixel(x, y, color-or-image)`
 
-Sets pixel color of given x, y coordinate.\
-For example `setPixel(10, 10, 'rgb(255, 255, 255)')`
+Sets pixel color or image of given x, y coordinate.\
+For example `setPixel(10, 10, 'rgb(255, 255, 255)')` sets pixel at 10, 10 (x,y) into white.\
+or\
+`setPixel(10, 10, 'https://sumo.app/images/icons/sumo-icon-64.png')` sets pixel at 10, 10 (x,y) into Sumo logo.
 
 ### setPixelByIndex
 `setPixelByIndex(index, color)`
