@@ -58,9 +58,13 @@ or this..\
 `Pixel.onPress = (pixel) => setPixel(pixel.column, pixel.row, 'white')`
 
 
-### listColors
-`listColors()`
-Outputs list of all color codes used in the scene into developer console.\
+### usedColors
+`usedColors`
+Array of color codes that has been selected from color picker (visible on toolbar).\
+
+### gridColors
+`gridColors`
+Array of color codes that are present in the grid.\
 
 ### invertColor
 `invertColors(target)`
