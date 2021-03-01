@@ -1,5 +1,5 @@
 # Sumopixel
-Documentation updated 24.2.2021
+Documentation updated 1.3.2021
 
 ### Code Editor Docs
 
