@@ -17,8 +17,31 @@ Here are the variables available in the code window
 - `brushColor` - Color code of the currently selected color, eg `rgb(255, 255, 255)`
 - `frames` - total number of frames (counted starting from zero)
 - `currentFrame` - number of the current frame (starts from zero)
+- `usedColors` - array of color codes that has been selected from color picker (visible on toolbar).
+- `gridColors` - array of color codes that are present in the grid.
 
 ## Methods
+
+- [setPixel](https://github.com/sumo-apps/pixel/blob/main/README.md#setpixel)
+- [setPixelByIndex](https://github.com/sumo-apps/pixel/blob/main/README.md#setpixelbyindex)
+- [Pixel.onPress](https://github.com/sumo-apps/pixel/blob/main/README.md#pixelonpress)
+- [invertColor](https://github.com/sumo-apps/pixel/blob/main/README.md#invertcolor)
+- [replaceColor](https://github.com/sumo-apps/pixel/blob/main/README.md#replacecolor)
+- [drawHLine](https://github.com/sumo-apps/pixel/blob/main/README.md#drawhline)
+- [drawVLine](https://github.com/sumo-apps/pixel/blob/main/README.md#drawvline)
+- [play](https://github.com/sumo-apps/pixel/blob/main/README.md#play)
+- [gotoFrame](https://github.com/sumo-apps/pixel/blob/main/README.md#gotoframe)
+- [addFrame](https://github.com/sumo-apps/pixel/blob/main/README.md#addframe)
+- [copyFrame](https://github.com/sumo-apps/pixel/blob/main/README.md#copyframe)
+- [wait](https://github.com/sumo-apps/pixel/blob/main/README.md#wait)
+- [shift](https://github.com/sumo-apps/pixel/blob/main/README.md#shiftup-shiftdown-shiftleft-shiftright)
+- [clear](https://github.com/sumo-apps/pixel/blob/main/README.md#clear)
+- [clearFrame](https://github.com/sumo-apps/pixel/blob/main/README.md#clearframe)
+- [clearAll](https://github.com/sumo-apps/pixel/blob/main/README.md#clearall)
+- [synth](https://github.com/sumo-apps/pixel/blob/main/README.md#synth)
+- [random](https://github.com/sumo-apps/pixel/blob/main/README.md#random)
+- [animate](https://github.com/sumo-apps/pixel/blob/main/README.md#animate)
+- [notify](https://github.com/sumo-apps/pixel/blob/main/README.md#notify)
 
 ### setPixel
 `setPixel(x, y, color-or-image)`
@@ -58,15 +81,6 @@ Then you could turn that pixel white by doing this:\
 or this..\
 \
 `Pixel.onPress = (pixel) => setPixel(pixel.column, pixel.row, 'white')`
-
-
-### usedColors
-`usedColors`
-Array of color codes that has been selected from color picker (visible on toolbar).\
-
-### gridColors
-`gridColors`
-Array of color codes that are present in the grid.\
 
 ### invertColor
 `invertColors(target)`
