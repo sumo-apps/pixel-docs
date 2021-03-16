@@ -33,6 +33,7 @@ Here are the variables available in the code window
 - [gotoFrame](https://github.com/sumo-apps/pixel/blob/main/README.md#gotoframe)
 - [addFrame](https://github.com/sumo-apps/pixel/blob/main/README.md#addframe)
 - [copyFrame](https://github.com/sumo-apps/pixel/blob/main/README.md#copyframe)
+- [deleteFrame](https://github.com/sumo-apps/pixel/blob/main/README.md#deleteframe)
 - [wait](https://github.com/sumo-apps/pixel/blob/main/README.md#wait)
 - [shift](https://github.com/sumo-apps/pixel/blob/main/README.md#shiftup-shiftdown-shiftleft-shiftright)
 - [clear](https://github.com/sumo-apps/pixel/blob/main/README.md#clear)
