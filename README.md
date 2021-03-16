@@ -133,7 +133,8 @@ For example: `play(15)` would start animation playback at 15 frames per second.
 
 `deleteFrame(frame)` - Deletes the given frame.\
 \
-PS. Notice that after the frame has been deleted `frames` array has also changed.
+Notice that after the frame has been deleted `frames` array has also changed.\
+For example, if there was 10 frames and you wanted to delete the first five frames, you would execute `deleteFrame(0)` five times.
 
 ### wait
 
