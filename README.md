@@ -128,6 +128,12 @@ For example: `play(15)` would start animation playback at 15 frames per second.
 
 `copyFrame()` creates new frame as a copy from the current frame.
 
+### deleteFrame
+
+`deleteFrame(frame)` - Deletes the given frame.\
+\
+PS. Notice that after the frame has been deleted `frames` array has also changed.
+
 ### wait
 
 `wait(seconds)` waits given time in seconds and returns promise.\
