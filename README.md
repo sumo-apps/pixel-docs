@@ -107,9 +107,9 @@ For example: `drawHLine(4, 'rgb(255, 255, 255)')` draws white line on fourth row
 
 ### drawVLine
 `drawVLine(col, color)`\
-Draws horizontal line at given column number (x-coordinate).
+Draws vertical line at given column number (x-coordinate).
 
-For example: `drawHLine(4, 'rgb(255, 255, 255)')` draws white line on fourth row
+For example: `drawVLine(4, 'rgb(255, 255, 255)')` draws white line on fourth row
 
 ### play
 `play(fps)`
